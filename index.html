@@ -1,67 +1,143 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Kristopher D. Heiskell — portfolio, projects, game development">
     <title>Kristopher's Portfolio</title>
+
     <style>
-        /* BASIC INLINE CSS FOR READABILITY */
+        /* Global styles */
+        :root {
+            --max-width: 1100px;
+            --accent: #333;
+            --card-bg: #fff;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            padding: 0 0 80px; 
+            background: #f4f4f4;
             color: #333;
         }
+
         header {
-            background-color: #333;
-            color: white;
-            padding: 1em 0;
+            background: var(--accent);
+            width: 100%;
+            color: #fff;
+            padding: 20px 0 20px;
             text-align: center;
         }
+
         nav ul {
-            list-style-type: none;
+            list-style: none;
+            margin: 0;
             padding: 0;
-            text-align: center;
+            display: inline-flex;
+            gap: 1rem;
         }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
+
+        nav a {
+            color: #fff;
             text-decoration: none;
         }
+
         .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px 0;
+            max-width: var(--max-width);
+            margin: 1.25rem auto;
+            padding: 0 1rem;
         }
+
         .main-content, .sidebar {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: var(--card-bg);
+            padding: 1.25rem;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,.06);
+            margin-bottom: 1rem;
         }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1rem;
+        }
+
         footer {
-            background-color: #333;
-            color: white;
+            background: var(--accent);
+            color: #fff;
             text-align: center;
-            padding: 1em 0;
+            padding: 0.75rem 0;
             position: fixed;
+            left: 0;
+            right: 0;
             bottom: 0;
+        }
+
+        /* Carousel  */
+        .carousel-container {
+            max-width: 900px;
             width: 100%;
+            margin: 1rem auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform .45s ease;
+        }
+
+            .carousel-images img {
+                width: 100%;
+                flex-shrink: 0;
+                display: block;
+                object-fit: contain;
+                height: auto;
+            }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,.45);
+            color: #fff;
+            border: none;
+            padding: .5rem .75rem;
+            font-size: 1.25rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+            .carousel-button.left {
+                left: 0.5rem;
+            }
+
+            .carousel-button.right {
+                right: 0.5rem;
+            }
+
+            .carousel-button[disabled] {
+                opacity: .45;
+                cursor: not-allowed;
+            }
+
+        /* Small screens */
+        @media (max-width:800px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-
+    <a id="top"></a>
     <header>
         <h1>Kristopher D. Heiskell</h1>
-        <p>Computer Science Student & Tech Enthusiast</p>
-        <nav>
+        <p>“If you can’t fix it, you don’t own it.” — Louis Rossmann</p>
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
@@ -70,382 +146,145 @@
         </nav>
     </header>
 
-    <div class="container">
-        
-        <section id="about" class="main-content">
-            <h2>About Me</h2>
-            
-            <p>I am a dedicated computer science student nearing the completion of my associate degree at Chattanooga State Community College. My academic journey has equipped me with a solid foundation in programming languages including C#, Java, and Python, as well as a deep understanding of code structure, syntax, and computer systems. I am currently pursuing CompTIA A+ certification, with plans to follow up with Network+ and Security+ to further strengthen my technical credentials.</p>
-            
-            <p>Education & Technical Skills: <br>Throughout my studies, I’ve developed a fundamental understanding of computer science—from binary systems to object-oriented programming. I particularly enjoy collaborative projects that challenge me to apply my knowledge. Advanced mathematics, including Calculus II and upcoming physics courses, has significantly added in my logical thinking and coding capabilities. My long-term goal is to earn a Master’s degree in Computer Science and contribute meaningfully to the tech industry.</p>
-            
-            <p>Professional Experience: <br>As the Barista Manager at Frothy Monkey Chattanooga, I lead a team of baristas. I am responsible for quality control, inventory management, training, and customer service. I take pride in promoting a supportive and knowledgeable team environment. When I transition into the tech field, I will ensure a smooth handoff to my assistant lead barista, leaving the team in capable hands.</p>
-            
-            <p>Home Lab & Technical Projects: <br>Technology has fascinated me since childhood. I am proud of my collection of tools and components that I use in my home lab. I repair and repurpose electronics, transforming outdated devices into functional tools—such as converting old laptops into media centers or using spare routers as Wi-Fi extenders. I built a crypto miner consisting of six Nvidia RTX 3080 GPUs and a custom open container for the hardware. I’ve built a personal cloud using salvaged HDDs and SSDs, and I regularly assist friends and family with troubleshooting and repairs. My philosophy is simple: “If you can’t fix it, you don’t own it.”</p>
-            
-            <p>Game Development & Digital Design: <br>I am a solo game developer. I am currently working on a sci-fi fantasy RPG that began as a passion project in May 2024. Since its inception, I’ve built a robust game system.
-
+    <main class="container">
+        <div class="layout">
 
-Currently, I am finalizing a playable introduction mission and preparing for a beta release on Steam. This project showcases my skills in 3D modeling, animation, programming, and storytelling—all driven by a desire to create immersive digital experiences.</p>
-        </section>
+            <div>
+                <section id="about" class="main-content" aria-labelledby="about-heading">
+                    <h2 id="about-heading">About Me</h2>
+                    <p>I am a computer science student nearing the completion of my associate's degree at Chattanooga State Community College. I have built a solid foundation in programming languages including C#, Java, and Python, as well as a fundamental understanding of code structure, syntax, and operating systems. I am an indie developer who is well versed in 3D modeling, animation, and scripting complex systems. I am pursuing <strong>CompTIA A+</strong>, then Network+ and Security+. I have spent a great deal of time troubleshooting and installing/uninstalling computer hardware/software.</p>
 
-        <section id="portfolio" class="main-content">
-            <h2>Portfolio</h2>
-            <ul>
-            <!-- Stock Group Project Java Class -->
-            <li><strong>Java Stock Management Class Project:</strong> I worked with two other peers to design an inventory managment system using Java.</li>
-                <style>
-                    /* CSS for making the fancy pants photo rotator because pdfs don't want to work for some reason...'*/
-                    .carousel-container {
-                        position: relative;
-                        width: 900px; 
-                        max-width: 200%; 
-                        margin: 50px auto;
-                        overflow: hidden; 
-                        border: 1px solid #ddd;
-                        border-radius: 8px;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    }
+                </section>
 
-                    .carousel-images {
-                        display: flex; /* Arrange images in a row */
-                        transition: transform 0.5s ease-in-out; /* Smooth out the sliding animation */
-                    }
+                <section id="portfolio" class="main-content" aria-labelledby="portfolio-heading">
+                    <h2 id="portfolio-heading">Portfolio</h2>
+                    <ul>
+                        <li>
+                            <strong>Java Stock Management (group)</strong>
+                            <p>Designed an inventory management system using Java.</p>
+                            <!-- Image Carousel -->
+                            <div class="carousel-container" aria-roledescription="carousel" aria-label="Project screenshots">
+                                <div class="carousel-images">
+                                    <img src="PDFs/TypewriterMonkeysPresentation1.png" alt="Slide 1" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation2.png" alt="Slide 2" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation3.png" alt="Slide 3" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation4.png" alt="Slide 4" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation4TWO.png" alt="Slide 4.5" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation5.png" alt="Slide 5" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation6.png" alt="Slide 6" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation7.png" alt="Slide 7" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation8.png" alt="Slide 8" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation9.png" alt="Slide 9" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation9TWO.png" alt="Slide 9.5" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation10.png" alt="Slide 10" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation10TWO.png" alt="Slide 10.5" loading="lazy">
+                                    <img src="PDFs/TypewriterMonkeysPresentation11.png" alt="Slide 11" loading="lazy">
+                                </div>
+                                <button class="carousel-button left" aria-label="Previous slide" type="button">&lt;</button>
+                                <button class="carousel-button right" aria-label="Next slide" type="button">&gt;</button>
+                            </div>
 
-                    .carousel-images img {
-                        width: 100%; /* Make each image fill the container width */
-                        flex-shrink: 0; /* Prevent images from shrinking */
-                        display: block; /* Remove extra space below images */
-                        height: auto; /* Maintain aspect ratio */
-                    }
+                            <p>If the embedded slideshow doesn't work, <a href="PDFs/TypewriterMonkeysPresentation.pdf">download the presentation (PDF)</a>.</p>
+                            <p><a href="ClassProject/group-project.zip">Download project files (zip)</a></p>
+                        </li>
+                        <li>
+                            <strong>Computer Repair & Upgrades</strong>
+                            <p>WIP — collecting images and write-ups.</p>
+                        </li>
+                        <li>
+                            <strong>Digital Design / Game Dev</strong>
+                            <p>I am a solo game developer. I am currently working on a sci-fi fantasy RPG that began as a passion project in May 2024. Unity 3D project (C#), all models made in Blender; preparing a beta release on Steam.</p>
+                        </li>
+                    </ul>
 
-                    .carousel-button {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        background-color: rgba(0, 0, 0, 0.5);
-                        color: white;
-                        border: none;
-                        padding: 10px 15px;
-                        cursor: pointer;
-                        font-size: 24px;
-                        border-radius: 50%; /* Round buttons */
-                        z-index: 10; /* Ensure buttons are on top of images */
-                        transition: background-color 0.3s ease;
-                    }
-
-                    .carousel-button:hover {
-                        background-color: rgba(0, 0, 0, 0.8);
-                    }
-
-                    .carousel-button.left {
-                        left: 0px;
-                    }
-
-                    .carousel-button.right {
-                        right: 0px;
-                    }
-
-                    /* Styling for disabled buttons */
-                    .carousel-button:disabled {
-                        background-color: rgba(128, 128, 128, 0.5);
-                        cursor: not-allowed;
-                    }
-                </style>
-
-                <body>
-
-                    <div class="carousel-container">
+                    <!-- Image Carousel -->
+                    <div class="carousel-container" aria-roledescription="carousel" aria-label="Project screenshots">
                         <div class="carousel-images">
-                            <img src="PDFs/TypewriterMonkeysPresentation1.png" alt="Slide 1">
-                            <img src="PDFs/TypewriterMonkeysPresentation2.png" alt="Slide 2">
-                            <img src="PDFs/TypewriterMonkeysPresentation3.png" alt="Slide 3">
-                            <img src="PDFs/TypewriterMonkeysPresentation4.png" alt="Slide 4">
-                            <img src="PDFs/TypewriterMonkeysPresentation4TWO.png" alt="Slide 4.5">
-                            <img src="PDFs/TypewriterMonkeysPresentation5.png" alt="Slide 5">
-                            <img src="PDFs/TypewriterMonkeysPresentation6.png" alt="Slide 6">
-                            <img src="PDFs/TypewriterMonkeysPresentation7.png" alt="Slide 7">
-                            <img src="PDFs/TypewriterMonkeysPresentation8.png" alt="Slide 8">
-                            <img src="PDFs/TypewriterMonkeysPresentation9.png" alt="Slide 9">
-                            <img src="PDFs/TypewriterMonkeysPresentation9TWO.png" alt="Slide 9.5">
-                            <img src="PDFs/TypewriterMonkeysPresentation10.png" alt="Slide 10">
-                            <img src="PDFs/TypewriterMonkeysPresentation10TWO.png" alt="Slide 10.5">
-                            <img src="PDFs/TypewriterMonkeysPresentation11.png" alt="Slide 11">
+                            <img src="GameDev/1.png" alt="Main character exploring a ruined city" loading="lazy">
+                            <img src="GameDev/2.png" alt="pic" loading="lazy">
+                            <img src="GameDev/3.png" alt="pic" loading="lazy">
+                            <img src="GameDev/4.png" alt="pic" loading="lazy">
+                            <img src="GameDev/5.png" alt="pic" loading="lazy">
+                            <img src="GameDev/6.png" alt="pic" loading="lazy">
+                            <img src="GameDev/7.png" alt="pic" loading="lazy">
+                            <img src="GameDev/8.png" alt="pic" loading="lazy">
+                            <img src="GameDev/9.png" alt="pic" loading="lazy">
+                            <img src="GameDev/10.png" alt="pic" loading="lazy">
+                            <img src="GameDev/11.png" alt="pic" loading="lazy">
+                            <img src="GameDev/12.png" alt="pic" loading="lazy">
+                            <img src="GameDev/13.png" alt="pic" loading="lazy">
+                            <img src="GameDev/14.png" alt="pic" loading="lazy">
+                            <img src="GameDev/15.png" alt="pic" loading="lazy">
+                            <img src="GameDev/16.png" alt="pic" loading="lazy">
+                            <img src="GameDev/17.png" alt="pic" loading="lazy">
+                            <img src="GameDev/18.png" alt="pic" loading="lazy">
+                            <img src="GameDev/19.png" alt="pic" loading="lazy">
+                            <img src="GameDev/20.png" alt="pic" loading="lazy">
+                            <img src="GameDev/21.png" alt="pic" loading="lazy">
+                            <img src="GameDev/22.png" alt="pic" loading="lazy">
+                            <img src="GameDev/23.png" alt="pic" loading="lazy">
+                            <img src="GameDev/24.png" alt="pic" loading="lazy">
+                            <img src="GameDev/25.png" alt="pic" loading="lazy">
+                            <img src="GameDev/26.png" alt="pic" loading="lazy">
+                            <img src="GameDev/27.png" alt="pic" loading="lazy">
+                            <img src="GameDev/28.png" alt="pic" loading="lazy">
                         </div>
-
-                        <button class="carousel-button left">&lt;</button>
-                        <button class="carousel-button right">&gt;</button>
+                        <button class="carousel-button left" aria-label="Previous slide" type="button">&lt;</button>
+                        <button class="carousel-button right" aria-label="Next slide" type="button">&gt;</button>
                     </div>
+                </section>
+            </div>
 
-                    <script>
-                        /**
-                         * Initializes a single image carousel.
-                         * @param {HTMLElement} container The main .carousel-container element.
-                         */
-                        function initializeCarousel(container) {
-                            // Use querySelector *on the container* to target elements specific to THIS carousel
-                            const carouselImages = container.querySelector('.carousel-images');
-                            const images = container.querySelectorAll('.carousel-images img');
-                            const leftButton = container.querySelector('.carousel-button.left');
-                            const rightButton = container.querySelector('.carousel-button.right');
+            <aside class="sidebar" aria-labelledby="recent-heading">
+                <h2 id="recent-heading">Recent Work</h2>
+                <p><strong>[10/23/2025]</strong> New portfolio website</p>
+                <p><strong>[10/23/2025]</strong> Begin CompTIA A+ studies</p>
+                <p>Expected associate's completion: May 2026</p>
+            </aside>
 
-                            let currentIndex = 0;
-                            const totalImages = images.length;
+        </div>
 
-                            // Function to update button states (disabled/enabled)
-                            function updateButtonStates() {
-                                leftButton.disabled = currentIndex === 0;
-                                rightButton.disabled = currentIndex === totalImages - 1;
-                            }
-
-                            // Function to show the current image
-                            function showImage(index) {
-                                const offset = -index * 100;
-                                carouselImages.style.transform = `translateX(${offset}%)`;
-                                updateButtonStates();
-                            }
-
-                            // Event listener for the NEXT button
-                            rightButton.addEventListener('click', () => {
-                                if (currentIndex < totalImages - 1) {
-                                    currentIndex++;
-                                    showImage(currentIndex);
-                                }
-                            });
-
-                            // Event listener for the PREVIOUS button
-                            leftButton.addEventListener('click', () => {
-                                if (currentIndex > 0) {
-                                    currentIndex--;
-                                    showImage(currentIndex);
-                                }
-                            });
-
-                            // Initialize the carousel
-                            showImage(currentIndex);
-                        }
-
-                        // This runs AFTER the page content is fully loaded
-                        document.addEventListener('DOMContentLoaded', () => {
-                            // 1. Get ALL carousel containers on the page
-                            const allCarousels = document.querySelectorAll('.carousel-container');
-
-                            // 2. Loop through each one and initialize it independently
-                            allCarousels.forEach(carousel => {
-                                initializeCarousel(carousel);
-                            });
-                        });
-                    </script>
-
-                </body>
-
-
-                <p>If your browser doesn’t support the slideshow or for better readability: 
-                <a href="PDFs/TypewriterMonkeysPresentation.pdf">Download the PDF</a> instead.</p>
-                <p>IDE required: 
-                <a href="ClassProject/group project.zip">Download Project Files</a>
-
-                <!-- Repairs and labwork -->
-                <li><strong>Computer Repair and Upgrades:</strong> </li>
-                <p>WIP gathering images</p>
-                <!-- Game dev -->
-                <li><strong>Digital Design / Game Development:</strong> </li>
-                <p>I am a solo developer utilizing unity 3D + C# coding and 3D modeling + animating with blender. I create all of my own original assets including models, textures, scripts, and sound effects.</p>
-                <style>
-                    /* CSS for making the fancy pants photo rotator because pdfs don't want to work for some reason...'*/
-                    /* this one will fit the image size instead of staying the same set size */
-                    .carousel-container {
-                        position: relative;
-                        width: 900px; /* Keep the desired fixed width or change it to max-width */
-                        max-width: 90%; /* Using 90% is often better for responsiveness */
-    
-                        /* Sets the height to fit the content */
-                        height: auto; 
-    
-                        /* Ensure padding is zero if you don't want extra space influencing the height */
-                        padding-bottom: 0; 
-    
-                        margin: 50px auto;
-                        overflow: hidden; 
-                        border: 1px solid #ddd;
-                        border-radius: 8px;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    }
-
-                    .carousel-images {
-                        display: flex;
-                        transition: transform 0.5s ease-in-out;
-    
-                        /*Allows the height to be determined by the children (the images) */
-                        align-items: flex-start; 
-                    }
-
-                    .carousel-images img {
-                        width: 100%;
-                        /* REMOVE or comment out the height: 100% you might have added earlier */
-                        /* object-fit: contain; is still a good idea to prevent internal image stretching */
-                        object-fit: contain; 
-    
-                        flex-shrink: 0;
-                        display: block;
-                        height: auto; /* Allows image height to be natural */
-}
-
-                    .carousel-button {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        background-color: rgba(0, 0, 0, 0.5);
-                        color: white;
-                        border: none;
-                        padding: 10px 15px;
-                        cursor: pointer;
-                        font-size: 24px;
-                        border-radius: 50%; /* Round buttons */
-                        z-index: 10; /* Ensure buttons are on top of images */
-                        transition: background-color 0.3s ease;
-                    }
-
-                    .carousel-button:hover {
-                        background-color: rgba(0, 0, 0, 0.8);
-                    }
-
-                    .carousel-button.left {
-                        left: 0px;
-                    }
-
-                    .carousel-button.right {
-                        right: 0px;
-                    }
-
-                    /* Styling for disabled buttons */
-                    .carousel-button:disabled {
-                        background-color: rgba(128, 128, 128, 0.5);
-                        cursor: not-allowed;
-                    }
-                </style>
-
-                <body>
-
-                    <div class="carousel-container">
-                        <div class="carousel-images">
-                            <img src="GameDev/1.png" alt="pic">
-                            <img src="GameDev/2.png" alt="pic">
-                            <img src="GameDev/3.png" alt="pic">
-                            <img src="GameDev/4.png" alt="pic">
-                            <img src="GameDev/5.png" alt="pic">
-                            <img src="GameDev/6.png" alt="pic">
-                            <img src="GameDev/7.png" alt="pic">
-                            <img src="GameDev/8.png" alt="pic">
-                            <img src="GameDev/9.png" alt="pic">
-                            <img src="GameDev/10.png" alt="pic">
-                            <img src="GameDev/11.png" alt="pic">
-                            <img src="GameDev/12.png" alt="pic">
-                            <img src="GameDev/13.png" alt="pic">
-                            <img src="GameDev/14.png" alt="pic">
-                            <img src="GameDev/15.png" alt="pic">
-                            <img src="GameDev/16.png" alt="pic">
-                            <img src="GameDev/17.png" alt="pic">
-                            <img src="GameDev/18.png" alt="pic">
-                            <img src="GameDev/19.png" alt="pic">
-                            <img src="GameDev/20.png" alt="pic">
-                            <img src="GameDev/21.png" alt="pic">
-                            <img src="GameDev/22.png" alt="pic">
-                            <img src="GameDev/23.png" alt="pic">
-                            <img src="GameDev/24.png" alt="pic">
-                            <img src="GameDev/25.png" alt="pic">
-                            <img src="GameDev/26.png" alt="pic">
-                            <img src="GameDev/27.png" alt="pic">
-                            <img src="GameDev/28.png" alt="pic">
-                            
-                        </div>
-
-                        <button class="carousel-button left">&lt;</button>
-                        <button class="carousel-button right">&gt;</button>
-                    </div>
-
-                    <script>
-                        /**
-                         * Initializes a single image carousel.
-                         * @param {HTMLElement} container The main .carousel-container element.
-                         */
-                        function initializeCarousel(container) {
-                            // Use querySelector *on the container* to target elements specific to THIS carousel
-                            const carouselImages = container.querySelector('.carousel-images');
-                            const images = container.querySelectorAll('.carousel-images img');
-                            const leftButton = container.querySelector('.carousel-button.left');
-                            const rightButton = container.querySelector('.carousel-button.right');
-
-                            let currentIndex = 0;
-                            const totalImages = images.length;
-
-                            // Function to update button states (disabled/enabled)
-                            function updateButtonStates() {
-                                leftButton.disabled = currentIndex === 0;
-                                rightButton.disabled = currentIndex === totalImages - 1;
-                            }
-
-                            // Function to show the current image
-                            function showImage(index) {
-                                const offset = -index * 100;
-                                carouselImages.style.transform = `translateX(${offset}%)`;
-                                updateButtonStates();
-                            }
-
-                            // Event listener for the NEXT button
-                            rightButton.addEventListener('click', () => {
-                                if (currentIndex < totalImages - 1) {
-                                    currentIndex++;
-                                    showImage(currentIndex);
-                                }
-                            });
-
-                            // Event listener for the PREVIOUS button
-                            leftButton.addEventListener('click', () => {
-                                if (currentIndex > 0) {
-                                    currentIndex--;
-                                    showImage(currentIndex);
-                                }
-                            });
-
-                            // Initialize the carousel
-                            showImage(currentIndex);
-                        }
-
-                        // This runs AFTER the page content is fully loaded
-                        document.addEventListener('DOMContentLoaded', () => {
-                            // 1. Get ALL carousel containers on the page
-                            const allCarousels = document.querySelectorAll('.carousel-container');
-
-                            // 2. Loop through each one and initialize it independently
-                            allCarousels.forEach(carousel => {
-                                initializeCarousel(carousel);
-                            });
-                        });
-                    </script>
-
-                </body>
-
-            </ul>
-        </section>
-
-        <aside class="sidebar">
-            <h2>Recent Work</h2>
-            <p><strong>[10/23/25]</strong>: New portfolio website</p>
-            <p><strong>[10/23/25]</strong>: Begin CompCIA A+ studies</p>
-            <p><strong>[10/23/25]</strong>: Semester near completion. Calculus based physics I and II for final semester. Expected associates completion May 2026</p>
-        </aside>
-
-        <section id="contact" class="main-content">
-            <h2>Contact Information</h2>
-            <p>I would love to hear from you!</p>
+        <section id="contact" class="main-content" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact</h2>
             <address>
                 Email: <a href="mailto:daltonheiskell@hotmail.com">daltonheiskell@hotmail.com</a><br>
-                Phone: (423) 551-1276
+                Phone: <a href="tel:+14235511276">(423) 551-1276</a>
             </address>
         </section>
+    </main>
 
-    </div>
+    <footer>Kristopher D. Heiskell <br> <a href="#top">Back to Top</a></footer>
 
+    <script>
+        // Single carousel initializer for all carousels
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.carousel-container').forEach(container => {
+                const images = container.querySelector('.carousel-images');
+                const slides = container.querySelectorAll('.carousel-images img');
+                const left = container.querySelector('.carousel-button.left');
+                const right = container.querySelector('.carousel-button.right');
+                let index = 0;
+
+                function update() {
+                    images.style.transform = `translateX(${-index * 100}%)`;
+                    left.disabled = index === 0;
+                    right.disabled = index === slides.length - 1;
+                }
+
+                left.addEventListener('click', () => { if (index > 0) { index--; update(); } });
+                right.addEventListener('click', () => { if (index < slides.length - 1) { index++; update(); } });
+
+                // keyboard support for accessibility
+                container.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') left.click();
+                    if (e.key === 'ArrowRight') right.click();
+                });
+
+                // Make container focusable for keyboard nav
+                container.tabIndex = 0;
+                update();
+            });
+        });
+    </script>
 </body>
 </html>
