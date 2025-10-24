@@ -99,9 +99,137 @@ Currently, I am finalizing a playable introduction mission and preparing for a b
             <h2>Portfolio</h2>
             <ul>
             <!-- Stock Group Project Java Class -->
-                <li><strong>Java Stock Management Class Project:</strong> I worked with two other peers to design an inventory managment system using Java.</li>
-                <iframe src="https://1drv.ms/p/c/f295ddf4916f4fb6/IQR5T83q-KELTI6jYL961B0NATjPL5EyZJxEbSb01I947hk?em=2&amp;wdAr=1.7777777777777777" width="776px" height="588px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
-                <p>If your browser doesn’t support viewing PDFs. 
+            <li><strong>Java Stock Management Class Project:</strong> I worked with two other peers to design an inventory managment system using Java.</li>
+                <style>
+                    /* CSS for making the fancy pants photo rotator because pdfs don't want to work for some reason...'*/
+                    .carousel-container {
+                        position: relative;
+                        width: 900px; 
+                        max-width: 200%; 
+                        margin: 50px auto;
+                        overflow: hidden; 
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .carousel-images {
+                        display: flex; /* Arrange images in a row */
+                        transition: transform 0.5s ease-in-out; /* Smooth out the sliding animation */
+                    }
+
+                    .carousel-images img {
+                        width: 100%; /* Make each image fill the container width */
+                        flex-shrink: 0; /* Prevent images from shrinking */
+                        display: block; /* Remove extra space below images */
+                        height: auto; /* Maintain aspect ratio */
+                    }
+
+                    .carousel-button {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background-color: rgba(0, 0, 0, 0.5);
+                        color: white;
+                        border: none;
+                        padding: 10px 15px;
+                        cursor: pointer;
+                        font-size: 24px;
+                        border-radius: 50%; /* Round buttons */
+                        z-index: 10; /* Ensure buttons are on top of images */
+                        transition: background-color 0.3s ease;
+                    }
+
+                    .carousel-button:hover {
+                        background-color: rgba(0, 0, 0, 0.8);
+                    }
+
+                    .carousel-button.left {
+                        left: 0px;
+                    }
+
+                    .carousel-button.right {
+                        right: 0px;
+                    }
+
+                    /* Styling for disabled buttons */
+                    .carousel-button:disabled {
+                        background-color: rgba(128, 128, 128, 0.5);
+                        cursor: not-allowed;
+                    }
+                </style>
+
+                <body>
+
+                    <div class="carousel-container">
+                        <div class="carousel-images">
+                            <img src="PDFs/TypewriterMonkeysPresentation1.png" alt="Slide 1">
+                            <img src="PDFs/TypewriterMonkeysPresentation2.png" alt="Slide 2">
+                            <img src="PDFs/TypewriterMonkeysPresentation3.png" alt="Slide 3">
+                            <img src="PDFs/TypewriterMonkeysPresentation4.png" alt="Slide 4">
+                            <img src="PDFs/TypewriterMonkeysPresentation4TWO.png" alt="Slide 4.5">
+                            <img src="PDFs/TypewriterMonkeysPresentation5.png" alt="Slide 5">
+                            <img src="PDFs/TypewriterMonkeysPresentation6.png" alt="Slide 6">
+                            <img src="PDFs/TypewriterMonkeysPresentation7.png" alt="Slide 7">
+                            <img src="PDFs/TypewriterMonkeysPresentation8.png" alt="Slide 8">
+                            <img src="PDFs/TypewriterMonkeysPresentation9.png" alt="Slide 9">
+                            <img src="PDFs/TypewriterMonkeysPresentation9TWO.png" alt="Slide 9.5">
+                            <img src="PDFs/TypewriterMonkeysPresentation10.png" alt="Slide 10">
+                            <img src="PDFs/TypewriterMonkeysPresentation10TWO.png" alt="Slide 10.5">
+                            <img src="PDFs/TypewriterMonkeysPresentation11.png" alt="Slide 11">
+                        </div>
+
+                        <button class="carousel-button left" onclick="prevImage()">&lt;</button>
+                        <button class="carousel-button right" onclick="nextImage()">&gt;</button>
+                    </div>
+
+                    <script>
+                        const carouselImages = document.querySelector('.carousel-images');
+                        const images = document.querySelectorAll('.carousel-images img');
+                        const leftButton = document.querySelector('.carousel-button.left');
+                        const rightButton = document.querySelector('.carousel-button.right');
+
+                        let currentIndex = 0;
+                        const totalImages = images.length;
+
+                        // Function to update button states (disabled/enabled)
+                        function updateButtonStates() {
+                            leftButton.disabled = currentIndex === 0;
+                            rightButton.disabled = currentIndex === totalImages - 1;
+                        }
+
+                        // Function to show the current image
+                        function showImage(index) {
+                            // Calculate the transform value to slide the images
+                            const offset = -index * 100; // 100% per image
+                            carouselImages.style.transform = `translateX(${offset}%)`;
+                            updateButtonStates(); // Update buttons every time an image is shown
+                        }
+
+                        // Function to go to the next image
+                        function nextImage() {
+                            if (currentIndex < totalImages - 1) {
+                                currentIndex++;
+                                showImage(currentIndex);
+                            }
+                        }
+
+                        // Function to go to the previous image
+                        function prevImage() {
+                            if (currentIndex > 0) {
+                                currentIndex--;
+                                showImage(currentIndex);
+                            }
+                        }
+
+                        // Initialize the carousel to show the first image and set button states
+                        showImage(currentIndex);
+                    </script>
+
+                </body>
+
+
+                <p>If your browser doesn’t support the slideshow or for better readability: 
                 <a href="PDFs/TypewriterMonkeysPresentation.pdf">Download the PDF</a> instead.</p>
                 <p>IDE required: 
                 <a href="ClassProject/group project.zip">Download Project Files</a>
