@@ -179,51 +179,68 @@ Currently, I am finalizing a playable introduction mission and preparing for a b
                             <img src="PDFs/TypewriterMonkeysPresentation11.png" alt="Slide 11">
                         </div>
 
-                        <button class="carousel-button left" onclick="prevImage()">&lt;</button>
-                        <button class="carousel-button right" onclick="nextImage()">&gt;</button>
+                        <button class="carousel-button left">&lt;</button>
+                        <button class="carousel-button right">&gt;</button>
                     </div>
 
                     <script>
-                        const carouselImages = document.querySelector('.carousel-images');
-                        const images = document.querySelectorAll('.carousel-images img');
-                        const leftButton = document.querySelector('.carousel-button.left');
-                        const rightButton = document.querySelector('.carousel-button.right');
+                        /**
+                         * Initializes a single image carousel.
+                         * @param {HTMLElement} container The main .carousel-container element.
+                         */
+                        function initializeCarousel(container) {
+                            // Use querySelector *on the container* to target elements specific to THIS carousel
+                            const carouselImages = container.querySelector('.carousel-images');
+                            const images = container.querySelectorAll('.carousel-images img');
+                            const leftButton = container.querySelector('.carousel-button.left');
+                            const rightButton = container.querySelector('.carousel-button.right');
 
-                        let currentIndex = 0;
-                        const totalImages = images.length;
+                            let currentIndex = 0;
+                            const totalImages = images.length;
 
-                        // Function to update button states (disabled/enabled)
-                        function updateButtonStates() {
-                            leftButton.disabled = currentIndex === 0;
-                            rightButton.disabled = currentIndex === totalImages - 1;
-                        }
-
-                        // Function to show the current image
-                        function showImage(index) {
-                            // Calculate the transform value to slide the images
-                            const offset = -index * 100; // 100% per image
-                            carouselImages.style.transform = `translateX(${offset}%)`;
-                            updateButtonStates(); // Update buttons every time an image is shown
-                        }
-
-                        // Function to go to the next image
-                        function nextImage() {
-                            if (currentIndex < totalImages - 1) {
-                                currentIndex++;
-                                showImage(currentIndex);
+                            // Function to update button states (disabled/enabled)
+                            function updateButtonStates() {
+                                leftButton.disabled = currentIndex === 0;
+                                rightButton.disabled = currentIndex === totalImages - 1;
                             }
-                        }
 
-                        // Function to go to the previous image
-                        function prevImage() {
-                            if (currentIndex > 0) {
-                                currentIndex--;
-                                showImage(currentIndex);
+                            // Function to show the current image
+                            function showImage(index) {
+                                const offset = -index * 100;
+                                carouselImages.style.transform = `translateX(${offset}%)`;
+                                updateButtonStates();
                             }
+
+                            // Event listener for the NEXT button
+                            rightButton.addEventListener('click', () => {
+                                if (currentIndex < totalImages - 1) {
+                                    currentIndex++;
+                                    showImage(currentIndex);
+                                }
+                            });
+
+                            // Event listener for the PREVIOUS button
+                            leftButton.addEventListener('click', () => {
+                                if (currentIndex > 0) {
+                                    currentIndex--;
+                                    showImage(currentIndex);
+                                }
+                            });
+
+                            // Initialize the carousel
+                            showImage(currentIndex);
                         }
 
-                        // Initialize the carousel to show the first image and set button states
-                        showImage(currentIndex);
+                        // This runs AFTER the page content is fully loaded
+                        document.addEventListener('DOMContentLoaded', () => {
+                            // 1. Get ALL carousel containers on the page
+                            const allCarousels = document.querySelectorAll('.carousel-container');
+
+                            // 2. Loop through each one and initialize it independently
+                            allCarousels.forEach(carousel => {
+                                initializeCarousel(carousel);
+                            });
+                        });
                     </script>
 
                 </body>
@@ -239,7 +256,181 @@ Currently, I am finalizing a playable introduction mission and preparing for a b
                 <p>WIP gathering images</p>
                 <!-- Game dev -->
                 <li><strong>Digital Design / Game Development:</strong> </li>
-                <p>WIP gathering images</p>
+                <p>I am a solo developer utilizing unity 3D + C# coding and 3D modeling + animating with blender. I create all of my own original assets including models, textures, scripts, and sound effects.</p>
+                <style>
+                    /* CSS for making the fancy pants photo rotator because pdfs don't want to work for some reason...'*/
+                    /* this one will fit the image size instead of staying the same set size */
+                    .carousel-container {
+                        position: relative;
+                        width: 900px; /* Keep the desired fixed width or change it to max-width */
+                        max-width: 90%; /* Using 90% is often better for responsiveness */
+    
+                        /* Sets the height to fit the content */
+                        height: auto; 
+    
+                        /* Ensure padding is zero if you don't want extra space influencing the height */
+                        padding-bottom: 0; 
+    
+                        margin: 50px auto;
+                        overflow: hidden; 
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .carousel-images {
+                        display: flex;
+                        transition: transform 0.5s ease-in-out;
+    
+                        /*Allows the height to be determined by the children (the images) */
+                        align-items: flex-start; 
+                    }
+
+                    .carousel-images img {
+                        width: 100%;
+                        /* REMOVE or comment out the height: 100% you might have added earlier */
+                        /* object-fit: contain; is still a good idea to prevent internal image stretching */
+                        object-fit: contain; 
+    
+                        flex-shrink: 0;
+                        display: block;
+                        height: auto; /* Allows image height to be natural */
+}
+
+                    .carousel-button {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background-color: rgba(0, 0, 0, 0.5);
+                        color: white;
+                        border: none;
+                        padding: 10px 15px;
+                        cursor: pointer;
+                        font-size: 24px;
+                        border-radius: 50%; /* Round buttons */
+                        z-index: 10; /* Ensure buttons are on top of images */
+                        transition: background-color 0.3s ease;
+                    }
+
+                    .carousel-button:hover {
+                        background-color: rgba(0, 0, 0, 0.8);
+                    }
+
+                    .carousel-button.left {
+                        left: 0px;
+                    }
+
+                    .carousel-button.right {
+                        right: 0px;
+                    }
+
+                    /* Styling for disabled buttons */
+                    .carousel-button:disabled {
+                        background-color: rgba(128, 128, 128, 0.5);
+                        cursor: not-allowed;
+                    }
+                </style>
+
+                <body>
+
+                    <div class="carousel-container">
+                        <div class="carousel-images">
+                            <img src="GameDev/1.png" alt="pic">
+                            <img src="GameDev/2.png" alt="pic">
+                            <img src="GameDev/3.png" alt="pic">
+                            <img src="GameDev/4.png" alt="pic">
+                            <img src="GameDev/5.png" alt="pic">
+                            <img src="GameDev/6.png" alt="pic">
+                            <img src="GameDev/7.png" alt="pic">
+                            <img src="GameDev/8.png" alt="pic">
+                            <img src="GameDev/9.png" alt="pic">
+                            <img src="GameDev/10.png" alt="pic">
+                            <img src="GameDev/11.png" alt="pic">
+                            <img src="GameDev/12.png" alt="pic">
+                            <img src="GameDev/13.png" alt="pic">
+                            <img src="GameDev/14.png" alt="pic">
+                            <img src="GameDev/15.png" alt="pic">
+                            <img src="GameDev/16.png" alt="pic">
+                            <img src="GameDev/17.png" alt="pic">
+                            <img src="GameDev/18.png" alt="pic">
+                            <img src="GameDev/19.png" alt="pic">
+                            <img src="GameDev/20.png" alt="pic">
+                            <img src="GameDev/21.png" alt="pic">
+                            <img src="GameDev/22.png" alt="pic">
+                            <img src="GameDev/23.png" alt="pic">
+                            <img src="GameDev/24.png" alt="pic">
+                            <img src="GameDev/25.png" alt="pic">
+                            <img src="GameDev/26.png" alt="pic">
+                            <img src="GameDev/27.png" alt="pic">
+                            <img src="GameDev/28.png" alt="pic">
+                            
+                        </div>
+
+                        <button class="carousel-button left">&lt;</button>
+                        <button class="carousel-button right">&gt;</button>
+                    </div>
+
+                    <script>
+                        /**
+                         * Initializes a single image carousel.
+                         * @param {HTMLElement} container The main .carousel-container element.
+                         */
+                        function initializeCarousel(container) {
+                            // Use querySelector *on the container* to target elements specific to THIS carousel
+                            const carouselImages = container.querySelector('.carousel-images');
+                            const images = container.querySelectorAll('.carousel-images img');
+                            const leftButton = container.querySelector('.carousel-button.left');
+                            const rightButton = container.querySelector('.carousel-button.right');
+
+                            let currentIndex = 0;
+                            const totalImages = images.length;
+
+                            // Function to update button states (disabled/enabled)
+                            function updateButtonStates() {
+                                leftButton.disabled = currentIndex === 0;
+                                rightButton.disabled = currentIndex === totalImages - 1;
+                            }
+
+                            // Function to show the current image
+                            function showImage(index) {
+                                const offset = -index * 100;
+                                carouselImages.style.transform = `translateX(${offset}%)`;
+                                updateButtonStates();
+                            }
+
+                            // Event listener for the NEXT button
+                            rightButton.addEventListener('click', () => {
+                                if (currentIndex < totalImages - 1) {
+                                    currentIndex++;
+                                    showImage(currentIndex);
+                                }
+                            });
+
+                            // Event listener for the PREVIOUS button
+                            leftButton.addEventListener('click', () => {
+                                if (currentIndex > 0) {
+                                    currentIndex--;
+                                    showImage(currentIndex);
+                                }
+                            });
+
+                            // Initialize the carousel
+                            showImage(currentIndex);
+                        }
+
+                        // This runs AFTER the page content is fully loaded
+                        document.addEventListener('DOMContentLoaded', () => {
+                            // 1. Get ALL carousel containers on the page
+                            const allCarousels = document.querySelectorAll('.carousel-container');
+
+                            // 2. Loop through each one and initialize it independently
+                            allCarousels.forEach(carousel => {
+                                initializeCarousel(carousel);
+                            });
+                        });
+                    </script>
+
+                </body>
 
             </ul>
         </section>
